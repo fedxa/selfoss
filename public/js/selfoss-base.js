@@ -29,6 +29,9 @@ var selfoss = {
             // set items per page
             selfoss.filter.itemsPerPage = $('.entry').length;
             
+            // initialize type by homepage config param
+            selfoss.filter.type = $('#nav-filter li.active').attr('id').replace('nav-filter-', '');
+            
             // init events
             selfoss.events.init();
             
@@ -81,6 +84,11 @@ var selfoss = {
      * @return true if device resolution smaller equals 1024
      */
     isMobile: function() {
+        // first check useragent
+        if((/iPhone|iPod|iPad|Android|BlackBerry/).test(navigator.userAgent))
+            return true;
+        
+        // otherwise check resolution
         return selfoss.isTablet() || selfoss.isSmartphone();
     },
     

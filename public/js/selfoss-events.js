@@ -38,7 +38,7 @@ selfoss.events = {
                 
             // from sources
             if(selfoss.events.lasthash=="#sources") {
-                $('#nav-filter li:first').click();
+                $('#nav-filter li.active').click();
             }
                 
             // from navigation
@@ -193,6 +193,10 @@ selfoss.events = {
                 $('.entry.unread').each(function(index, item) {
                     ids.push( $(item).attr('id').substr(5) );
                 });
+
+                if(ids.length === 0){
+                    return;
+                }
                 
                 $.ajax({
                     url: $('base').attr('href') + 'mark',
@@ -445,6 +449,34 @@ selfoss.events = {
         parent.find('.entry-loadimages').unbind('click').click(function() {
             $(this).parents('.entry').lazyLoadImages();
             $(this).fadeOut();
+            return false;
+        });
+        
+        // open in new window
+        parent.find('.entry-newwindow').unbind('click').click(function(e) {
+            window.open($(this).parents(".entry").children("a").eq(0).attr("href"));
+            e.preventDefault();
+            return false;
+        });
+        
+        // share with google plus
+        parent.find('.entry-sharegoogle').unbind('click').click(function(e) {
+            window.open("https://plus.google.com/share?url="+encodeURIComponent($(this).parents(".entry").children("a").eq(0).attr("href")));
+            e.preventDefault();
+            return false;
+        });
+        
+        // share with twitter
+        parent.find('.entry-sharetwitter').unbind('click').click(function(e) {
+            window.open("https://twitter.com/intent/tweet?source=webclient&text="+encodeURIComponent($(this).parents(".entry").children(".entry-title").html())+" "+encodeURIComponent($(this).parents(".entry").children("a").eq(0).attr("href")));
+            e.preventDefault();
+            return false;
+        });
+        
+        // share with facebook
+        parent.find('.entry-sharefacebook').unbind('click').click(function(e) {
+            window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent($(this).parents(".entry").children("a").eq(0).attr("href"))+"&t="+encodeURIComponent($(this).parents(".entry").children(".entry-title").html()));
+            e.preventDefault();
             return false;
         });
         
