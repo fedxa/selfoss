@@ -15,7 +15,7 @@ selfoss.events = {
         $("#nav-tags-wrapper").mCustomScrollbar();
         $(window).bind("resize", selfoss.events.resize);
         selfoss.events.resize();
-
+        
         // hash change event
         window.onhashchange = selfoss.events.hashChange;
         
@@ -78,13 +78,12 @@ selfoss.events = {
         if(selfoss.isSmartphone()==false) {
             var start = $('#nav-tags-wrapper').position().top;
             var windowHeight = $(window).height();
-            $('#nav-tags-wrapper').height(windowHeight-start-100);
+            $('#nav-tags-wrapper').height(windowHeight - start - 100);
             $("#nav-tags-wrapper").mCustomScrollbar("update");
             $('#nav').show();
         } else {
             $('#nav-tags-wrapper').height("auto");
             $("#nav-tags-wrapper").mCustomScrollbar("disable",selfoss.isSmartphone());
-	    // TODO fix sources!
         }
     },
     
